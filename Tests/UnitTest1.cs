@@ -17,6 +17,7 @@ public class Tests
     {
         await container.StartAsync();
         await using var connection = new NpgsqlConnection(container.GetConnectionString());
+        Console.WriteLine("Connection string: " + connection.ConnectionString);
         await connection.OpenAsync();
         await using var command = new NpgsqlCommand("SELECT 1", connection);
         await command.ExecuteScalarAsync();
