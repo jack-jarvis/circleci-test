@@ -24,6 +24,6 @@ workflows:
   only-on-branches-with-foo:
     when:
       or:
-        - equal: [<<pipeline.git.branch>>, foo]
+        - matches: { pattern: "foo/.*", value: << pipeline.git.branch >>}
     jobs:
       - say-hello
