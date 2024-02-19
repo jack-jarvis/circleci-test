@@ -1,26 +1,37 @@
 version: 2.1
 
+orbs:
+  win: circleci/windows@5.0
+
+
 jobs:
-  postgres-tests:
-    docker:
-      - image: mcr.microsoft.com/dotnet/sdk:7.0.402@sha256:d0755fbf1ed34aecd79c127fd1dd01b80587acdb8ff50e5a68d1adf8b076922b
-    steps:
-      - checkout
-      - setup_remote_docker:
-          version: 20.10.14
-      - run:
-          name: Run tests
-          command: dotnet test
   say-hello:
     docker:
       - image: cimg/base:current
     steps:
-      - run: echo "hello world!"
+      - run: |
+          mkdir workspace
+          echo "Hello world!" > workspace/helloworld.txt
+      - persist_to_workspace:
+          paths: 
+            - workspace
+  windows-workspace:
+    executor:
+      name: win/server-2022
+      version: current
+    steps:
+      - attach_workspace:
+          at: workspace
+      - run: type workspace\helloworld.txt
 
 workflows:
   build:
     jobs:
-      - postgres-tests
+      - say-hello
+      - windows-workspace:
+          requires:
+            - say-hello
+
   only-on-branches-with-foo:
     when:
       or:
