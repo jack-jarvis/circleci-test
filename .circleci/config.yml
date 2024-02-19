@@ -21,7 +21,7 @@ jobs:
   windows-workspace:
     executor:
       name: win/server-2022
-      version: current
+      version: 2023.10.1
     steps:
       - attach_workspace:
           at: workspace
