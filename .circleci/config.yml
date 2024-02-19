@@ -15,6 +15,7 @@ jobs:
             mkdir workspace
             echo "Hello world!" > workspace/helloworld.txt
       - persist_to_workspace:
+          root: workspace
           paths: 
             - workspace
   windows-workspace:
