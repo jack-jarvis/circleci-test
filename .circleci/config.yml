@@ -13,7 +13,7 @@ jobs:
           name: Create large file
           command: |
             mkdir workspace
-            dd if=/dev/random of=workspace/big.file bs=1073741824 count=1
+            dd if=/dev/random of=workspace/big.file bs=1048576 count=500
       - persist_to_workspace:
           root: workspace
           paths: 
@@ -25,7 +25,10 @@ jobs:
     steps:
       - attach_workspace:
           at: workspace
-      - run: type workspace\helloworld.txt
+      - run: 
+          name: List files
+          command: |
+            dir workspace
 
 workflows:
   build:
