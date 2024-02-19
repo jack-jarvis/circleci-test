@@ -10,6 +10,7 @@ jobs:
       - image: cimg/base:current
     steps:
       - run: 
+          name: Do something
           command: |
             mkdir workspace
             echo "Hello world!" > workspace/helloworld.txt
