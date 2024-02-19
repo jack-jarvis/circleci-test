@@ -9,9 +9,10 @@ jobs:
     docker:
       - image: cimg/base:current
     steps:
-      - run: |
-          mkdir workspace
-          echo "Hello world!" > workspace/helloworld.txt
+      - run: 
+          command: |
+            mkdir workspace
+            echo "Hello world!" > workspace/helloworld.txt
       - persist_to_workspace:
           paths: 
             - workspace
