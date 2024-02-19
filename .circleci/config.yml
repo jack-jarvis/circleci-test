@@ -10,10 +10,10 @@ jobs:
       - image: cimg/base:current
     steps:
       - run: 
-          name: Do something
+          name: Create large file
           command: |
             mkdir workspace
-            echo "Hello world!" > workspace/helloworld.txt
+            dd if=/dev/random of=workspace/big.file bs=1073741824 count=1
       - persist_to_workspace:
           root: workspace
           paths: 
